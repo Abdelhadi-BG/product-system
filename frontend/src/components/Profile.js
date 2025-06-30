@@ -6,26 +6,34 @@ const Profile = () => {
 
     return (
         <div className="container">
-            <header className="jumbotron">
-                <h3>
-                    <strong>{currentUser.username}</strong> Profile
-                </h3>
-            </header>
-            <p>
-                <strong>Token:</strong> {currentUser.token.substring(0, 20)} ...{" "}
-                {currentUser.token.substr(currentUser.token.length - 20)}
-            </p>
-            <p>
-                <strong>Id:</strong> {currentUser.id}
-            </p>
-            <p>
-                <strong>Email:</strong> {currentUser.email}
-            </p>
-            <strong>Authorities:</strong>
-            <ul>
-                {currentUser.roles &&
-                    currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-            </ul>
+            <div className="card card-container">
+                <img
+                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                    alt="profile-img"
+                    className="profile-img-card"
+                />
+
+                <header className="jumbotron">
+                    <h3>
+                        <strong>{currentUser.username}</strong> Profile
+                    </h3>
+                </header>
+                <p>
+                    <strong>Token:</strong> {currentUser.token.substring(0, 20)} ...{" "}
+                    {currentUser.token.substr(currentUser.token.length - 20)}
+                </p>
+                <p>
+                    <strong>Id:</strong> {currentUser.id}
+                </p>
+                <p>
+                    <strong>Email:</strong> {currentUser.email}
+                </p>
+                <strong>Authorities:</strong>
+                <ul>
+                    {currentUser.roles &&
+                        currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
+                </ul>
+            </div>
         </div>
     );
 };
