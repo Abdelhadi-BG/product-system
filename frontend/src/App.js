@@ -9,10 +9,9 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import Profile from './components/Profile';
-import BoardUser from './components/BoardUser';
-import BoardModerator from './components/BoardModerator';
-import BoardAdmin from './components/BoardAdmin';
+
 import ProductList from './components/ProductList';
+import AdminPanel from './components/AdminPanel';
 
 const App = () => {
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -22,10 +21,24 @@ const App = () => {
     useEffect(() => {
         const user = AuthService.getCurrentUser();
 
-        if (user) {
+        if (user && user !== 'undefined') {
             setCurrentUser(user);
-            setShowModeratorBoard(user.roles.includes('ROLE_MODERATOR'));
-            setShowAdminBoard(user.roles.includes('ROLE_ADMIN'));
+
+            // Ensure roles is an array and handle case where it might be undefined
+            const userRoles = Array.isArray(user.roles) 
+                ? user.roles.map(role => 
+                    typeof role === 'string' 
+                        ? role.toUpperCase() 
+                        : String(role).toUpperCase()
+                  )
+                : [];
+            
+            setShowModeratorBoard(userRoles.includes('ROLE_MODERATOR'));
+            setShowAdminBoard(userRoles.includes('ROLE_ADMIN'));
+        } else {
+            setCurrentUser(undefined);
+            setShowModeratorBoard(false);
+            setShowAdminBoard(false);
         }
     }, []);
 
@@ -61,7 +74,7 @@ const App = () => {
                         {showAdminBoard && (
                             <li className="nav-item">
                                 <Link to={'/admin'} className="nav-link">
-                                    Admin Board
+                                    Admin Panel
                                 </Link>
                             </li>
                         )}
@@ -112,9 +125,7 @@ const App = () => {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/profile" element={<Profile />} />
-                        <Route path="/user" element={<BoardUser />} />
-                        <Route path="/mod" element={<BoardModerator />} />
-                        <Route path="/admin" element={<BoardAdmin />} />
+                        <Route path="/admin" element={<AdminPanel />} />
                         <Route path="/products" element={<ProductList />} />
                     </Routes>
                 </div>

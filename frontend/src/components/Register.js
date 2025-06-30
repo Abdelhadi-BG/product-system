@@ -5,6 +5,7 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
     const [successful, setSuccessful] = useState(false);
     const [message, setMessage] = useState('');
 
@@ -14,7 +15,7 @@ const Register = () => {
         setMessage('');
         setSuccessful(false);
 
-        AuthService.register(username, email, password).then(
+        AuthService.register(username, email, password, isAdmin).then(
             (response) => {
                 setMessage(response.data.message);
                 setSuccessful(true);
@@ -79,6 +80,19 @@ const Register = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                 />
+                            </div>
+
+                            <div className="form-group form-check">
+                                <input
+                                    type="checkbox"
+                                    className="form-check-input"
+                                    id="isAdmin"
+                                    checked={isAdmin}
+                                    onChange={(e) => setIsAdmin(e.target.checked)}
+                                />
+                                <label className="form-check-label" htmlFor="isAdmin">
+                                    Register as Admin
+                                </label>
                             </div>
 
                             <div className="form-group">

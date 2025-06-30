@@ -11,9 +11,19 @@ const ProductList = () => {
     useEffect(() => {
         const user = AuthService.getCurrentUser();
 
-        if (user) {
-            setShowModeratorBoard(user.roles.includes('ROLE_MODERATOR'));
-            setShowAdminBoard(user.roles.includes('ROLE_ADMIN'));
+        if (user && user.roles) {
+            const roles = Array.isArray(user.roles) ? user.roles : [];
+            setShowModeratorBoard(roles.some(role => 
+                String(role).toUpperCase() === 'ROLE_MODERATOR' || 
+                String(role).toUpperCase() === 'MODERATOR'
+            ));
+            setShowAdminBoard(roles.some(role => 
+                String(role).toUpperCase() === 'ROLE_ADMIN' || 
+                String(role).toUpperCase() === 'ADMIN'
+            ));
+        } else {
+            setShowModeratorBoard(false);
+            setShowAdminBoard(false);
         }
 
         fetchProducts();

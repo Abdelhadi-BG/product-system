@@ -11,9 +11,16 @@ class AuthService {
             })
             .then(response => {
                 if (response.data.token) {
-                    localStorage.setItem('user', JSON.stringify(response.data));
+                    const userData = {
+                        ...response.data,
+                        // Ensure roles is always an array and properly formatted
+                        roles: (response.data.roles || []).map(role => 
+                            role.startsWith('ROLE_') ? role : `ROLE_${role.toUpperCase()}`
+                        )
+                    };
+                    localStorage.setItem('user', JSON.stringify(userData));
+                    return userData;
                 }
-
                 return response.data;
             });
     }
@@ -22,11 +29,12 @@ class AuthService {
         localStorage.removeItem('user');
     }
 
-    register(username, email, password) {
+    register(username, email, password, isAdmin = false) {
         return axios.post(API_URL + 'signup', {
             username,
             email,
-            password
+            password,
+            role: isAdmin ? ['admin'] : ['user']
         });
     }
 
