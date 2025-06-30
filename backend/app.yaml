@@ -1,1 +1,29 @@
 runtime: java17
+
+# Application settings
+env_variables:
+  SPRING_PROFILES_ACTIVE: 'prod'
+  SPRING_DATASOURCE_URL: ${DB_URL}
+  SPRING_DATASOURCE_USERNAME: ${DB_USER}
+  SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+  SPRING_JPA_HIBERNATE_DDL_AUTO: update
+  SPRING_JPA_SHOW_SQL: 'true'
+  SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+  SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: 'true'
+  SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA: public
+  SPRING_SESSION_STORE_TYPE: jdbc
+  SERVER_PORT: 8080
+  SERVER_SERVLET_CONTEXT_PATH: /
+  CORS_ALLOWED_ORIGINS: 'http://localhost:3001,http://localhost:3000'
+
+
+# Health check settings
+health_check:
+  enable_health_check: True
+  check_interval_sec: 30
+  timeout_sec: 10
+  unhealthy_threshold: 2
+  healthy_threshold: 2
+  restart_threshold: 3
+
+
