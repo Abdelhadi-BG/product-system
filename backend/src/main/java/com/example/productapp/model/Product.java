@@ -59,6 +59,7 @@ public class Product extends AbstractBaseModel {
 
     private String manufacturer;
 
+
     @Builder.Default
     private boolean active = true;
 

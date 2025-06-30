@@ -1,6 +1,0 @@
-INSERT INTO products (id, name, description, price, quantity, image_url, created_at, updated_at) VALUES
-(uuid_generate_v4(), 'Modern E-Bike', 'A sleek and powerful electric bike for the modern commuter.', 2999.99, 15, 'https://images.unsplash.com/photo-1576638749539-6a9c7d8182d3?q=80&w=2070&auto=format&fit=crop', NOW(), NOW()),
-(uuid_generate_v4(), 'Classic Leather-Bound Journal', 'A timeless journal for your thoughts and sketches.', 45.50, 120, 'https://images.unsplash.com/photo-1516423351253-6c5b8d2c3f8e?q=80&w=1974&auto=format&fit=crop', NOW(), NOW()),
-(uuid_generate_v4(), 'Ergonomic Office Chair', 'Stay comfortable and productive with this ergonomic chair.', 350.00, 45, 'https://images.unsplash.com/photo-1580480055273-228ff5388ef8?q=80&w=1974&auto=format&fit=crop', NOW(), NOW()),
-(uuid_generate_v4(), 'Smart Home Hub', 'Control your smart devices with a single hub.', 129.99, 75, 'https://images.unsplash.com/photo-1518444065439-e933c06ce9ce?q=80&w=2070&auto=format&fit=crop', NOW(), NOW()),
-(uuid_generate_v4(), 'Wireless Noise-Cancelling Headphones', 'Immerse yourself in sound with these premium headphones.', 349.99, 90, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop', NOW(), NOW());
