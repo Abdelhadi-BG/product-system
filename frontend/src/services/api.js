@@ -1,23 +1,25 @@
 import axios from 'axios';
+import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8080/api/products';
+const api = axios.create({
+  baseURL: 'http://localhost:8080/api',
+});
 
-export const getAllProducts = () => {
-    return axios.get(API_URL);
-};
+api.interceptors.request.use(
+  (config) => {
+    const headers = authHeader();
+    if (headers.Authorization) {
+      config.headers['Authorization'] = headers.Authorization;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
-export const getProductById = (id) => {
-    return axios.get(`${API_URL}/${id}`);
-};
-
-export const createProduct = (product) => {
-    return axios.post(API_URL, product);
-};
-
-export const updateProduct = (id, product) => {
-    return axios.put(`${API_URL}/${id}`, product);
-};
-
-export const deleteProduct = (id) => {
-    return axios.delete(`${API_URL}/${id}`);
-};
+export const getAllProducts = () => api.get('/products');
+export const getProductById = (id) => api.get(`/products/${id}`);
+export const createProduct = (product) => api.post('/products', product);
+export const updateProduct = (id, product) => api.put(`/products/${id}`, product);
+export const deleteProduct = (id) => api.delete(`/products/${id}`);

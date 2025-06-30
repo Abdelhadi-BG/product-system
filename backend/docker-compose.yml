@@ -2,12 +2,12 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:13
+    image: postgres:15-alpine
     container_name: postgres_db
     environment:
       POSTGRES_DB: productdb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: pass
     ports:
       - "5432:5432"
     volumes:
@@ -23,7 +23,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/productdb
       - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_DATASOURCE_PASSWORD=pass
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 volumes:
