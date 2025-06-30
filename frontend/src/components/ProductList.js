@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllProducts, deleteProduct } from '../services/api';
+import AuthService from '../services/auth.service';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
+    const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+    const [showAdminBoard, setShowAdminBoard] = useState(false);
 
     useEffect(() => {
+        const user = AuthService.getCurrentUser();
+
+        if (user) {
+            setShowModeratorBoard(user.roles.includes('ROLE_MODERATOR'));
+            setShowAdminBoard(user.roles.includes('ROLE_ADMIN'));
+        }
+
         fetchProducts();
     }, []);
 
@@ -32,7 +42,9 @@ const ProductList = () => {
     return (
         <div>
             <h1>Products</h1>
-            <Link to="/add" className="btn btn-primary mb-3">Add Product</Link>
+            {(showModeratorBoard || showAdminBoard) && (
+                <Link to="/add" className="btn btn-primary mb-3">Add Product</Link>
+            )}
             <div className="row">
                 {products.map(product => (
                     <div key={product.id} className="col-md-4 mb-4">
@@ -42,8 +54,12 @@ const ProductList = () => {
                                 <h5 className="card-title">{product.name}</h5>
                                 <p className="card-text">${product.price}</p>
                                 <div className="mt-auto">
-                                    <Link to={`/edit/${product.id}`} className="btn btn-info me-2">Edit</Link>
-                                    <button onClick={() => handleDelete(product.id)} className="btn btn-danger">Delete</button>
+                                    {(showModeratorBoard || showAdminBoard) && (
+                                        <>
+                                            <Link to={`/edit/${product.id}`} className="btn btn-info me-2">Edit</Link>
+                                            <button onClick={() => handleDelete(product.id)} className="btn btn-danger">Delete</button>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>

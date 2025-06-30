@@ -29,6 +29,9 @@ public class Product extends AbstractBaseModel {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Column(length = 1024)
     private String description;
 
