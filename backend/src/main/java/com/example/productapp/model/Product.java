@@ -55,10 +55,9 @@ public class Product extends AbstractBaseModel {
 
     private Double weight;
 
-    private String dimensions; // e.g., "LxWxH"
+    private String dimensions; // like"LxWxH"
 
     private String manufacturer;
-
 
     @Builder.Default
     private boolean active = true;

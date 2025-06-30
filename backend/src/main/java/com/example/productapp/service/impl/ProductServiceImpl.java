@@ -1,13 +1,13 @@
-package com.example.productapp.service;
+package com.example.productapp.service.impl;
 
-import com.example.productapp.model.Product;
 import com.example.productapp.exception.ResourceNotFoundException;
+import com.example.productapp.model.Product;
 import com.example.productapp.repository.ProductRepository;
+import com.example.productapp.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,27 +34,28 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(UUID id, Product productDetails) {
-                Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
-
+        Product product = getProductById(id);
+        
+        // Update the product details
         product.setName(productDetails.getName());
         product.setDescription(productDetails.getDescription());
         product.setPrice(productDetails.getPrice());
-        product.setSku(productDetails.getSku());
+        product.setImageUrl(productDetails.getImageUrl());
         product.setCategory(productDetails.getCategory());
+        product.setSku(productDetails.getSku());
         product.setBrand(productDetails.getBrand());
         product.setStockQuantity(productDetails.getStockQuantity());
-        product.setImageUrl(productDetails.getImageUrl());
         product.setWeight(productDetails.getWeight());
         product.setDimensions(productDetails.getDimensions());
-
+        product.setManufacturer(productDetails.getManufacturer());
+        product.setActive(productDetails.isActive());
+        
         return productRepository.save(product);
     }
 
     @Override
     public void deleteProduct(UUID id) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+        Product product = getProductById(id);
         productRepository.delete(product);
     }
 }

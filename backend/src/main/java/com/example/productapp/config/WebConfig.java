@@ -17,7 +17,7 @@ import java.util.Arrays;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${CORS_ALLOWED_ORIGINS:http://localhost:3001}")
+    @Value("${CORS_ALLOWED_ORIGINS:http://localhost:3000}")
     private String[] allowedOrigins;
 
     @Override
