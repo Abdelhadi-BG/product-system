@@ -33,29 +33,23 @@ const ProductList = () => {
         <div>
             <h1>Products</h1>
             <Link to="/add" className="btn btn-primary mb-3">Add Product</Link>
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>SKU</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map(product => (
-                        <tr key={product.id}>
-                            <td>{product.name}</td>
-                            <td>${product.price}</td>
-                            <td>{product.sku}</td>
-                            <td>
-                                <Link to={`/edit/${product.id}`} className="btn btn-sm btn-info">Edit</Link>
-                                <button onClick={() => handleDelete(product.id)} className="btn btn-sm btn-danger ms-2">Delete</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <div className="row">
+                {products.map(product => (
+                    <div key={product.id} className="col-md-4 mb-4">
+                        <div className="card h-100">
+                            <img src={product.imageUrl || 'https://via.placeholder.com/150'} className="card-img-top" alt={product.name} style={{ height: '200px', objectFit: 'cover' }} />
+                            <div className="card-body d-flex flex-column">
+                                <h5 className="card-title">{product.name}</h5>
+                                <p className="card-text">${product.price}</p>
+                                <div className="mt-auto">
+                                    <Link to={`/edit/${product.id}`} className="btn btn-info me-2">Edit</Link>
+                                    <button onClick={() => handleDelete(product.id)} className="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

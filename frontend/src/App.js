@@ -7,13 +7,20 @@ import './App.css';
 function App() {
     return (
         <Router>
-            <div className="container mt-4">
-                <Routes>
-                    <Route path="/" element={<ProductList />} />
-                    <Route path="/add" element={<ProductForm />} />
-                    <Route path="/edit/:id" element={<ProductForm />} />
-                </Routes>
-            </div>
+            <>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div className="container-fluid">
+                        <a className="navbar-brand" href="/">ProductApp</a>
+                    </div>
+                </nav>
+                <div className="container mt-4">
+                    <Routes>
+                        <Route path="/" element={<ProductList />} />
+                        <Route path="/add" element={<ProductForm />} />
+                        <Route path="/edit/:id" element={<ProductForm />} />
+                    </Routes>
+                </div>
+            </>
         </Router>
     );
 }
