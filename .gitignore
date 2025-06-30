@@ -1,0 +1,40 @@
+# Backend - Gradle
+.gradle
+build/
+!backend/build/
+
+# Backend - IntelliJ
+.idea/
+*.iml
+
+# Backend - Eclipse
+.settings/
+.classpath
+.project
+
+# Frontend - Node
+frontend/node_modules/
+frontend/build/
+frontend/.pnp.js
+frontend/.pnp.loader.js
+frontend/coverage/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
