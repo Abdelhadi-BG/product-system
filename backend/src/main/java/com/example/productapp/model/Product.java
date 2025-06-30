@@ -53,8 +53,6 @@ public class Product extends AbstractBaseModel {
     @Column(nullable = false)
     private Integer stockQuantity;
 
-    private String imageUrl;
-
     private Double weight;
 
     private String dimensions; // e.g., "LxWxH"

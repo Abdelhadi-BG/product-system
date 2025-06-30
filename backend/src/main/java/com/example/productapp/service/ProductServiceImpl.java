@@ -47,8 +47,6 @@ public class ProductServiceImpl implements ProductService {
         product.setImageUrl(productDetails.getImageUrl());
         product.setWeight(productDetails.getWeight());
         product.setDimensions(productDetails.getDimensions());
-        product.setManufacturer(productDetails.getManufacturer());
-        product.setActive(productDetails.isActive());
 
         return productRepository.save(product);
     }
