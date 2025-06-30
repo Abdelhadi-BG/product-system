@@ -19,7 +19,7 @@ public class JwtUtils {
     @Value("${productapp.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${productapp.app.jwtExpirationMs}")
+    @Value("${productapp.app.jwtExpirationMs:86400000}")
     private int jwtExpirationMs;
 
     private Key key() {
